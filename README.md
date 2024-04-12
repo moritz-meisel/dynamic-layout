@@ -1,7 +1,6 @@
-#
-Dynamic Layouts
+# Dynamic Layouts 📰
 
-## Data Structure 📰
+## Data Structure
 Layouts can be defined as a tree of LayoutNodes
 
 ```ts
