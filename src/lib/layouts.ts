@@ -2,76 +2,46 @@ import Header from "./Components/Header.svelte";
 import Aside from "./Components/Aside.svelte";
 import Main from "./Components/Main.svelte";
 import Footer from "./Components/Footer.svelte";
+import Navigation from "./Components/Navigation.svelte";
 
 export type LayoutNode = {
-  type: string;
-  children?: Node[];
-  style: string;
-  component?: any;
-}
+  children?: LayoutNode[];
+  style?: string;
+  component?: string;
+};
+
+export const COMPONENTS = {
+  Header: Header,
+  Aside: Aside,
+  Main: Main,
+  Footer: Footer,
+  Navigation: Navigation,
+};
 
 export const layout: LayoutNode = {
-  type: "group",
   style: "flex flex-col h-full",
   children: [
     {
-      type: "element",
-      component: Header,
-      style: ""
+      component: "Header",
     },
     {
-      type: "group",
       style: "flex flex-grow",
       children: [
         {
-          type: "element",
-          component: Aside,
-          style: "h-full"
+          component: "Aside",
+          style: "h-full",
         },
         {
-          type: "element",
-          component: Main,
-          style: "flex flex-grow"
-        }
-      ]
+          component: "Main",
+          style: "flex flex-grow",
+        },
+      ],
     },
     {
-      type: "element",
-      component: Footer,
-      style: ""
-    }
-  ]
-}
+      component: "Footer",
+    },
+  ],
+};
 
-export const veryCustomLayout: LayoutNode = {
-  type: "group",
-  style: "flex flex-col h-full",
-  children: [
-    {
-      type: "element",
-      component: Header,
-      style: ""
-    },
-    {
-      type: "element",
-      component: Footer,
-      style: ""
-    },
-    {
-      type: "group",
-      style: "flex flex-grow",
-      children: [
-        {
-          type: "element",
-          component: Main,
-          style: "flex flex-grow"
-        },
-        {
-          type: "element",
-          component: Aside,
-          style: "h-full"
-        }
-      ]
-    }
-  ]
-}
+export const customLayoutString = `{"style":"flex flex-col h-full","children":[{"component":"Header"},{"component":"Footer"},{"style":"flex flex-grow","children":[{"component":"Main","style":"flex flex-grow"},{"component":"Aside","style":"h-full"}]}]}`;
+export const veryCustomLayout: LayoutNode = JSON.parse(customLayoutString);
